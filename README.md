@@ -1,0 +1,1 @@
+# Sample-Report-BlazorServer-Net70-Pack

@@ -1,0 +1,32 @@
+@page "/"
+@using System.Data
+@using System.IO
+@using Stimulsoft.Base
+@using Stimulsoft.Report
+@using Stimulsoft.Report.Blazor
+@using Stimulsoft.Report.Dictionary
+@using Stimulsoft.Report.Web
+
+<StiBlazorViewer Report="@report" Options="@options"
+	Localization="Localization/en.xml"
+	Theme="StiViewerTheme.Office2022WhiteBlue" />
+
+@code
+{
+	private StiReport report;
+	private StiBlazorViewerOptions options;
+
+	protected override void OnInitialized()
+	{
+		report = StiReport.CreateNewDashboard();
+		using (var stream = File.OpenRead("Reports/Report.mrt"))
+		{
+			report.Load(stream);
+		}
+
+		options = new StiBlazorViewerOptions();
+		options.Appearance.FullScreenMode = true;
+
+		base.OnInitialized();
+	}
+}
